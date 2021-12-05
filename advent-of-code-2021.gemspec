@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'The solutions to Advent of Code 2021'
   spec.description   = 'The solutions to Advent of Code written in Ruby'
   spec.homepage      = 'https://emilygiurleo.dev'
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 2.7.2'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/egiurleo/advent-of-code-2021'
