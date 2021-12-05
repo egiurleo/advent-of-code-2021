@@ -16,7 +16,7 @@ class DayGenerator
 
                      sig { params(input: String).void }
                      def initialize(input)
-                       @input = T.let(input.chomp.split(','), T::Array[String])
+                       @input = T.let(input.chomp.split("\n"), T::Array[String])
                      end
 
                      sig { void }
@@ -42,12 +42,14 @@ class DayGenerator
                    let(:input) { File.open('spec/input/day_#{day}.txt').read }
 
                    describe '#part_1' do
-                     it 'returns the correct answer do' do
+                     it 'returns the correct answer' do
+                       expect(described_class.new(input).part_one).to eq(0)
                      end
                    end
 
                    describe '#part_2' do
-                     it 'returns the correct answer do' do
+                     it 'returns the correct answer' do
+                       expect(described_class.new(input).part_two).to eq(0)
                      end
                    end
                  end
