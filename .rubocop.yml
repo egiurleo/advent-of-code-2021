@@ -2,10 +2,16 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7.2
 
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Enabled: false
 
-tyle/AccessorGrouping:
+Style/AccessorGrouping:
   Enabled: false
 
 Style/Documentation:

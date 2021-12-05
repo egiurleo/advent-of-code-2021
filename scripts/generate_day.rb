@@ -16,7 +16,7 @@ class DayGenerator
 
                      sig { params(input: String).void }
                      def initialize(input)
-                       @input = T.let(input.chomp.split("\n"), T::Array[String])
+                       @input = T.let(input.chomp.split("\\n"), T::Array[String])
                      end
 
                      sig { void }
