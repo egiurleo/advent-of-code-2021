@@ -2,19 +2,28 @@
 # typed: true
 # frozen_string_literal: true
 
-class DayCreator
+class DayGenerator
   def self.run(day)
     File.write("lib/advent_of_code_2021/day_#{day}.rb",
                <<~HEREDOC
+                 # typed: strict
+
+                 require 'sorbet-runtime'
+
                  module AdventOfCode2021
                    class Day#{day}
+                     extend T::Sig
+
+                     sig { params(input: String).void }
                      def initialize(input)
-                       @input = input.chomp.split(',')
+                       @input = T.let(input.chomp.split(','), T::Array[String])
                      end
 
+                     sig { void }
                      def part_one
                      end
 
+                     sig { void }
                      def part_two
                      end
                    end
@@ -23,7 +32,7 @@ class DayCreator
               )
 
     File.open('lib/advent_of_code_2021.rb', 'a') do |f|
-      f.puts "require 'advent_of_code_2021/day_#{day}'"
+      f.puts "require_relative 'advent_of_code_2021/day_#{day}'"
     end
 
     File.write("spec/input/day_#{day}.txt", '')
@@ -33,9 +42,13 @@ class DayCreator
                    let(:input) { File.open('spec/input/day_#{day}.txt').read }
 
                    describe '#part_1' do
+                     it 'returns the correct answer do' do
+                     end
                    end
 
                    describe '#part_2' do
+                     it 'returns the correct answer do' do
+                     end
                    end
                  end
                HEREDOC
@@ -49,4 +62,4 @@ raise 'Cannot create new files without specifying a day' unless argument
 
 raise 'Day must be an integer between 1 and 25' unless argument.is_a?(Integer) && argument <= 25 && argument >= 1
 
-DayCreator.run(ARGV.first)
+DayGenerator.run(ARGV.first)
