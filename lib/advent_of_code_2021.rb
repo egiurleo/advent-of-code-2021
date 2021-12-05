@@ -9,3 +9,4 @@ module AdventOfCode2021
 end
 
 require_relative 'advent_of_code_2021/day_1'
+require_relative 'advent_of_code_2021/day_2'
