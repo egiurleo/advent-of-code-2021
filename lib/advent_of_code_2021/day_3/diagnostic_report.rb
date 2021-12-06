@@ -49,22 +49,15 @@ module AdventOfCode2021
       def most_common_bits(binary_numbers)
         binary_number_length = binary_numbers.fetch(0).length
 
-        zeros = T.let(Array.new(binary_number_length, 0), T::Array[Integer])
-        ones = T.let(Array.new(binary_number_length, 0), T::Array[Integer])
+        (0...binary_number_length)
+          .to_a
+          .map { |idx| binary_numbers.map { |number| number[idx] }.tally }
+          .map do |tally|
+            tally[0] ||= 0
+            tally[1] ||= 0
 
-        binary_numbers.each do |number|
-          number.each_with_index do |bit, bit_idx|
-            if bit.zero?
-              zeros[bit_idx] = zeros.fetch(bit_idx) + 1
-            else
-              ones[bit_idx] = ones.fetch(bit_idx) + 1
-            end
+            tally[0] > tally[1] ? 0 : 1
           end
-        end
-
-        (0...binary_number_length).to_a.map do |idx|
-          zeros.fetch(idx) > ones.fetch(idx) ? 0 : 1
-        end
       end
 
       sig { params(binary_numbers: T::Array[T::Array[Integer]]).returns(T::Array[Integer]) }

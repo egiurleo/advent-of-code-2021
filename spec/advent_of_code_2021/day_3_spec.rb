@@ -11,7 +11,7 @@ describe AdventOfCode2021::Day3 do
 
   describe '#part_2' do
     it 'returns the correct answer' do
-      expect(described_class.new(input).part_two).to eq(0)
+      expect(described_class.new(input).part_two).to eq(3_385_170)
     end
 
     context 'example' do
