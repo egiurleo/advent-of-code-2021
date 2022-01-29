@@ -11,6 +11,9 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Enabled: false
 
+Naming/MethodParameterName:
+  Enabled: false
+
 Style/AccessorGrouping:
   Enabled: false
 

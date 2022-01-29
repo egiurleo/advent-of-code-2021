@@ -15,7 +15,7 @@ module AdventOfCode2021
     def initialize(input)
       @input = T.let(input.chomp.split("\n"), T::Array[String])
 
-      numbers = @input.shift.split(',').map(&:to_i)
+      numbers = T.must(@input.shift).split(',').map(&:to_i)
       @input.shift
       @input += ['']
 

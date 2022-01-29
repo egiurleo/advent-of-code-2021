@@ -34,8 +34,8 @@ module AdventOfCode2021
         @last_marked_number = num
 
         row, col = position
-        @marked_rows[row] = @marked_rows.fetch(row) + 1
-        @marked_cols[col] = @marked_cols.fetch(col) + 1
+        @marked_rows[T.must(row)] = @marked_rows.fetch(T.must(row)) + 1
+        @marked_cols[T.must(col)] = @marked_cols.fetch(T.must(col)) + 1
       end
 
       sig { returns(T::Boolean) }
