@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# typed: strict
+
 module AdventOfCode2021
   class Day5
     class Vent
@@ -37,7 +39,7 @@ module AdventOfCode2021
         xs = [@x1, @x2].sort
         ys = [@y1, @y2].sort
 
-        x >= xs.first && x <= xs.last && y >= ys.first && y <= ys.last
+        x >= T.must(xs.first) && x <= T.must(xs.last) && y >= T.must(ys.first) && y <= T.must(ys.last)
       end
 
       sig { returns(T::Boolean) }
@@ -57,24 +59,26 @@ module AdventOfCode2021
 
       private
 
+      sig { returns(Integer) }
       def delta_x
-        @delta_x ||= if @x1 == @x2
-                       0
-                     elsif @x1 < @x2
-                       1
-                     else
-                       -1
-                     end
+        if @x1 == @x2
+          0
+        elsif @x1 < @x2
+          1
+        else
+          -1
+        end
       end
 
+      sig { returns(Integer) }
       def delta_y
-        @delta_y ||= if @y1 == @y2
-                       0
-                     elsif @y1 < @y2
-                       1
-                     else
-                       -1
-                     end
+        if @y1 == @y2
+          0
+        elsif @y1 < @y2
+          1
+        else
+          -1
+        end
       end
     end
   end

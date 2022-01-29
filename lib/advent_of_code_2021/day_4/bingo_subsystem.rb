@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+# typed: strict
+
 module AdventOfCode2021
   class Day4
     class BingoSubsystem
       extend T::Sig
 
+      sig { returns(T::Array[AdventOfCode2021::Day4::BingoBoard]) }
       attr_reader :winners
 
       sig { params(numbers: T::Array[Integer], boards: T::Array[T::Array[T::Array[Integer]]]).void }
@@ -31,7 +34,7 @@ module AdventOfCode2021
         @boards.each do |board|
           next if board.won?
 
-          board.mark(number)
+          board.mark(T.must(number))
           @winners << board if board.won?
         end
       end

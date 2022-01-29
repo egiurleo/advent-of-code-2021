@@ -40,13 +40,13 @@ module AdventOfCode2021
     sig { returns(Integer) }
     def part_one
       @bingo_subsystem.play
-      @bingo_subsystem.winners.first.score
+      T.must(@bingo_subsystem.winners.first).score
     end
 
     sig { returns(Integer) }
     def part_two
       @bingo_subsystem.play
-      @bingo_subsystem.winners.last.score
+      T.must(@bingo_subsystem.winners.last).score
     end
   end
 end
