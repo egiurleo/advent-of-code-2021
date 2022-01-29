@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 module AdventOfCode2021
   class Day4
     class BingoSubsystem
       extend T::Sig
 
+      attr_reader :winners
+
       sig { params(numbers: T::Array[Integer], boards: T::Array[T::Array[T::Array[Integer]]]).void }
       def initialize(numbers, boards)
         @numbers = T.let(numbers.dup, T::Array[Integer])
         @boards = T.let([], T::Array[AdventOfCode2021::Day4::BingoBoard])
-        @winner = T.let(nil, T.nilable(AdventOfCode2021::Day4::BingoBoard))
+        @winners = T.let([], T::Array[AdventOfCode2021::Day4::BingoBoard])
 
         boards.each do |board_numbers|
           @boards << BingoBoard.new(board_numbers)
@@ -16,28 +20,20 @@ module AdventOfCode2021
 
       sig { void }
       def play
-        while !won?
-          draw
-        end
+        draw until @numbers.empty?
       end
 
       sig { void }
       def draw
-        return if @numbers.empty? || won?
+        return if @numbers.empty?
 
         number = @numbers.shift
-        @boards.each { |board| board.mark(number) }
-        @winner = @boards.find(&:won?)
-      end
+        @boards.each do |board|
+          next if board.won?
 
-      sig { returns(T::Boolean) }
-      def won?
-        !@winner.nil?
-      end
-
-      sig { returns(Integer) }
-      def score
-        @winner&.score
+          board.mark(number)
+          @winners << board if board.won?
+        end
       end
     end
   end

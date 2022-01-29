@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # typed: strict
 
 module AdventOfCode2021
@@ -38,13 +40,13 @@ module AdventOfCode2021
 
       sig { returns(T::Boolean) }
       def won?
-        @marked_rows.any? { |num_marked| num_marked == @board_size} ||
+        @marked_rows.any? { |num_marked| num_marked == @board_size } ||
           @marked_cols.any? { |num_marked| num_marked == @board_size }
       end
 
       sig { returns(Integer) }
       def score
-        sum = @numbers_to_marked.select { |num, marked| !marked }.sum { |num, _| num }
+        sum = @numbers_to_marked.reject { |_num, marked| marked }.sum { |num, _| num }
         sum * @last_marked_number
       end
     end

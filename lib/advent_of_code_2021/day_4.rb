@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # typed: strict
 
 require 'sorbet-runtime'
@@ -26,7 +28,7 @@ module AdventOfCode2021
           next
         end
 
-        curr_board << line.split(' ').map(&:to_i)
+        curr_board << line.split.map(&:to_i)
       end
 
       @bingo_subsystem = T.let(
@@ -38,11 +40,13 @@ module AdventOfCode2021
     sig { returns(Integer) }
     def part_one
       @bingo_subsystem.play
-      @bingo_subsystem.score
+      @bingo_subsystem.winners.first.score
     end
 
-    sig { void }
+    sig { returns(Integer) }
     def part_two
+      @bingo_subsystem.play
+      @bingo_subsystem.winners.last.score
     end
   end
 end
