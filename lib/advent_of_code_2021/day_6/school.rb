@@ -7,28 +7,25 @@ module AdventOfCode2021
     class School
       extend T::Sig
 
-      AGE_OF_NEW_FISH = 8
-      AGE_OF_RESTARTED_FISH = 6
-
       sig { params(ages: T::Array[Integer]).void }
       def initialize(ages)
-        @fish_counts = T.let([0, 0, 0, 0, 0, 0, 0, 0, 0], T::Array[Integer])
+        @fish_counts = T.let(Array.new(8, 0), T::Array[Integer])
 
         ages.each { |age| @fish_counts[age] = @fish_counts.fetch(age) + 1 }
       end
 
       sig { void }
       def age_up
-        old_old_fish = @fish_counts.last
+        num_older_fish = T.must(@fish_counts.last)
 
-        AGE_OF_NEW_FISH.downto(1).each do |age|
-          old_fish = @fish_counts[age - 1]
-          @fish_counts[age - 1] = T.must(old_old_fish)
-          old_old_fish = old_fish
+        8.downto(1).each do |age|
+          num_younger_fish = T.must(@fish_counts[age - 1])
+          @fish_counts[age - 1] = num_older_fish
+          num_older_fish = num_younger_fish
         end
 
-        @fish_counts[AGE_OF_NEW_FISH] = T.must(old_old_fish)
-        @fish_counts[AGE_OF_RESTARTED_FISH] = @fish_counts.fetch(AGE_OF_RESTARTED_FISH) + T.must(old_old_fish)
+        @fish_counts[8] = num_older_fish
+        @fish_counts[6] = @fish_counts.fetch(6) + num_older_fish
       end
 
       sig { params(days: Integer).void }
