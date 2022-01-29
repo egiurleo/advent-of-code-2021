@@ -11,3 +11,4 @@ end
 require_relative 'advent_of_code_2021/day_1'
 require_relative 'advent_of_code_2021/day_2'
 require_relative 'advent_of_code_2021/day_3'
+require_relative 'advent_of_code_2021/day_4'
